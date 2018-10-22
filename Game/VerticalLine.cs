@@ -4,28 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game
+namespace Snake
 {
-    class VerticallLine: Figure {
-        
-        public VerticallLine(int yTop, int yBottom, int x, char sym)
-        {
-            plist = new List<Point>();
-            for (int y = yTop; y <= yBottom; y++)
-            {
-                Point p = new Point(x, y, sym);
-                plist.Add(p);
-
-            }
-
-            //Point p1 = new Point(4,4,'*');
-            //Point p2 = new Point(5,4,'*');
-            //Point p3 = new Point(6,4,'*');
-            //plist.Add(p1);
-            //plist.Add(p2);
-            //plist.Add(p3);
-        }
-
-        
-    }
+	class VerticalLine : Figure
+	{
+		public VerticalLine( int yUp, int yDown, int x, char sym )
+		{
+			pList = new List<Point>();
+			for(int y = yUp; y <= yDown; y++)
+			{
+				Point p = new Point( x, y, sym );
+				pList.Add( p );
+			}			
+		}
+	}
 }
