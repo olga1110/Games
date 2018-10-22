@@ -10,26 +10,50 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            int x1 = 1;
-            int y1 = 3;
-            char sym1 = '*';
 
-            Draw(x1, y1, sym1);
+            //Console.SetBufferSize(80, 25);
+            //Рамка
+            HorizontalLine upline = new HorizontalLine(0,78,0, '+');
+            HorizontalLine downline = new HorizontalLine(0,78,24, '+');
+            VerticallLine leftline = new VerticallLine(0,24,0, '+');
+            VerticallLine rightline = new VerticallLine(0,24,78, '+');
 
-            int x2 = 4;
-            int y2 = 5;
-            char sym2 = '#';
+            upline.Draw();
+            downline.Draw();
+            leftline.Draw();
+            rightline.Draw();
 
-            Draw(x2, y2, sym2);
 
-            Console.ReadLine();
+            //точки
+            Point p1 = new Point(1, 3, '*');
+            p1.Draw();
+
+            Point p2 = new Point(4, 5, '#');           
+            p2.Draw();
+
+
+            // Отрисовка точек			
+            Point p = new Point(4, 5, '*');
+            Snake snake = new Snake(p, 4, Direction.RIGHT);
+            snake.Draw();
+
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.HandleKey(key.Key);
+                }
+                Thread.Sleep(100);
+                snake.Move();
+            }
+
+
+
+
+
         }
 
-        static void Draw(int x, int y, char sym)
-        {
-            Console.SetCursorPosition(x, y);
-            Console.Write(sym);
-        }
-
+        
     }
 }
