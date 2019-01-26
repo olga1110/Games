@@ -1,0 +1,7 @@
+C:\Users\Ольга\C#\snake\Game\Game\bin\Debug\Game.exe.config
+C:\Users\Ольга\C#\snake\Game\Game\bin\Debug\Game.exe
+C:\Users\Ольга\C#\snake\Game\Game\bin\Debug\Game.pdb
+C:\Users\Ольга\C#\snake\Game\Game\obj\Debug\Game.csprojAssemblyReference.cache
+C:\Users\Ольга\C#\snake\Game\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
+C:\Users\Ольга\C#\snake\Game\Game\obj\Debug\Game.exe
+C:\Users\Ольга\C#\snake\Game\Game\obj\Debug\Game.pdb
