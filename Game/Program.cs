@@ -2,34 +2,74 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
-namespace Game
+namespace Snake
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            int x1 = 1;
-            int y1 = 3;
-            char sym1 = '*';
+	class Program
+	{
+		static void Main( string[] args )
+		{
+			Console.SetBufferSize( 80, 25 );
 
-            Draw(x1, y1, sym1);
+			Walls walls = new Walls( 80, 25 );
+			walls.Draw();
 
-            int x2 = 4;
-            int y2 = 5;
-            char sym2 = '#';
+			// Отрисовка точек			
+			Point p = new Point( 4, 5, '*' );
+			Snake snake = new Snake( p, 4, Direction.RIGHT );
+			snake.Draw();
 
-            Draw(x2, y2, sym2);
+			FoodCreator foodCreator = new FoodCreator( 80, 25, '$' );
+			Point food = foodCreator.CreateFood();
+			food.Draw();
 
-            Console.ReadLine();
-        }
+			while (true)
+			{
+				if ( walls.IsHit(snake) || snake.IsHitTail() )
+				{
+					break;
+				}
+				if(snake.Eat( food ) )
+				{
+					food = foodCreator.CreateFood();
+					food.Draw();
+				}
+				else
+				{
+					snake.Move();
+				}
 
-        static void Draw(int x, int y, char sym)
-        {
-            Console.SetCursorPosition(x, y);
-            Console.Write(sym);
-        }
+				Thread.Sleep( 100 );
+				if ( Console.KeyAvailable )
+				{
+					ConsoleKeyInfo key = Console.ReadKey();
+					snake.HandleKey( key.Key );
+				}
+			}
+			WriteGameOver();
+			Console.ReadLine();
+      }
 
-    }
+
+		static void WriteGameOver()
+		{
+			int xOffset = 25;
+			int yOffset = 8;
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.SetCursorPosition( xOffset, yOffset++ );
+			WriteText( "============================", xOffset, yOffset++ );
+			WriteText( "GAME IS OVER", xOffset + 1, yOffset++ );
+			yOffset++;
+			WriteText( "TRY AGAIN!", xOffset + 2, yOffset++ );			
+			WriteText( "============================", xOffset, yOffset++ );
+		}
+
+		static void WriteText( String text, int xOffset, int yOffset )
+		{
+			Console.SetCursorPosition( xOffset, yOffset );
+			Console.WriteLine( text );
+		}
+
+	}
 }
